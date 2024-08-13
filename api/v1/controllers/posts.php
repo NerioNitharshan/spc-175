@@ -447,10 +447,11 @@ function read_blogs_latest() {
     $c = new ContentsModel();
     $blogs = $c->get_latest_blogs();
 
-    $response = '';
+    $response = '<div class="flex flex-no-wrap overflow-x-auto no-scrollbar scrolling-touch items-start my-6" >';
     foreach ($blogs as $b) {
         $response .= Helpers::renderNative(VIEWS.'home-blogs-list.php', $b);
     }
+    $response .= '</div>';
 
     echo $response;
 }

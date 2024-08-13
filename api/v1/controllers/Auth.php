@@ -33,7 +33,7 @@ class Auth
         debug("auth_state handler invoke", __FILE__);
 
         if (isset($_SESSION["email"]) === false) {
-            echo Helpers::renderNative(VIEWS . 'noauth.php', ["login" => SERVER . '/auth/login', "sigin" => SERVER . '/auth/signin']);
+            echo Helpers::renderNative(VIEWS . 'noauth.html', ["login" => SERVER . '/auth/login', "sigin" => SERVER . '/auth/signin']);
             exit(0);
         }
 
@@ -54,6 +54,7 @@ class Auth
      */
     public function login(): void
     {
+        session_start();
         if (isset($_SESSION["email"])) {
             header("Location: " . SERVER . "/");
             http_response_code(303);
@@ -73,10 +74,12 @@ class Auth
 
         switch ($users->authenticateUser($email, $password)) {
             case Constants::OK:
-                session_start();
                 session_regenerate_id();
                 $_SESSION["email"] = $email;
-                echo Helpers::renderNative(VIEWS . "login-ok.html", []);
+                echo Helpers::renderNative(VIEWS . "login-ok.php", [
+                    "is_user_editor"=> $users->check_roles_exist(EDITOR_ROLE, $_SESSION['email']),
+                    "is_user_sadmin"=> $users->check_roles_exist(SUPADMIN_ROLE, $_SESSION['email'])
+                ]);
                 break;
 
             case Constants::NotFound:
@@ -183,5 +186,19 @@ class Auth
                 echo "Something wrong happened. Contact Support";
                 exit(1);
         }
+    }
+
+    #[NoReturn] public function mobile_auth_state(): void
+    {
+       session_start();
+
+       if (isset($_SESSION['email'])){
+           echo Helpers::renderNative(VIEWS."mobile-state-auth.php", []);
+       } else {
+           echo Helpers::renderNative(VIEWS."mobile-state-unauth.html", []);
+       }
+
+       session_write_close();
+       exit();
     }
 }

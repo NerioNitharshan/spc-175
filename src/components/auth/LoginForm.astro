@@ -4,7 +4,9 @@ import TextInput from "../common/TextInput.astro";
 import { get_api_route } from "../../config/global";
 ---
 
-<form hx-post={get_api_route("login")} hx-swap="outerHTML">
+<form class="htmxenable" method="post" hx-post={get_api_route("login")} hx-swap="outerHTML"
+hx-select-oob="#navbar-auth:innerHTML, #navbar-auth-mobile:innerHTML"
+>
     <TextInput type="email" id="email" label="Email Address" />
 
     <TextInput type="password" id="password" label="Password" />
@@ -25,4 +27,5 @@ import { get_api_route } from "../../config/global";
         </button
         >
     </div>
+    <a href="/auth/signin" class="underline underline-offset-4">New? Register here.</a>
 </form>

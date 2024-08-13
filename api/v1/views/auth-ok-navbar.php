@@ -1,7 +1,7 @@
 <button x-on:click="open = !open" x-on:mouseover="open = true" type="button"
         class="inline-flex w-full justify-center gap-x-1.5 rounded-sm px-3 py-2 text-sm font-semibold group-hover:underline group-hover:underline-offset-4"
         id="auth-menu" aria-expanded="true" aria-haspopup="true">
-    <span><?= $user_name; ?></span>
+    <span>Account Options</span>
     <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
          aria-hidden="true">
         <path fill-rule="evenodd"
@@ -53,14 +53,11 @@
         <!--destructive actions-->
         <form action="<?= API . "logout" ?>" method="post">
             <button
-                class="font-bold block px-4 py-2 text-sm hover:bg-spc-gold hover:text-black transition-colors duration-200 ease-in-out"
+                class="font-bold w-full text-left block px-4 py-2 text-sm hover:bg-spc-gold hover:text-black transition-colors duration-200 ease-in-out"
                 type="submit"
             >Logout
             </button
             >
         </form>
-        <a href="#"
-           class="font-bold block px-4 py-2 text-sm hover:bg-spc-gold hover:text-black transition-colors duration-200 ease-in-out"
-           role="menuitem" tabindex="-1">Deactivate Profile</a>
     </div>
 </div>

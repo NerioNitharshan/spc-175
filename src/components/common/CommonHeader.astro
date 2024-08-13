@@ -2,32 +2,31 @@
 import "@fontsource/playfair-display/700.css";
 import SPCLogo from "./SPCLogo.astro";
 import MobileNavigationMenu from "./MobileNavigationMenu.astro";
-import {NEW_NAVS} from "@config/navigation";
+import { NEW_NAVS } from "@config/navigation";
 import DesktopNav from "./DesktopNav.astro";
 
-const {now, title} = Astro.props;
+const { now, title } = Astro.props;
 ---
 
-<header class="xl:hidden"
->
-
+<header class="xl:hidden">
     <a href="/">
-        <div class="flex items-center justify-center w-full space-x-4 pt-10 pb-8 border-b border-b-spc-light/10 mb-8 md:space-x-6">
-            <SPCLogo dim={120}/>
+        <div
+            class="flex items-center justify-center w-full space-x-4 pt-10 pb-8 border-b border-b-spc-light/10 mb-8 md:space-x-6">
+            <SPCLogo dim={120} />
             <h1
-                    class="font-serif text-3xl font-bold text-spc-light text-left"
-                    set:html={title}
+                class="font-serif text-3xl font-bold text-spc-light text-left"
+                set:html={title}
             />
         </div>
     </a>
-    <MobileNavigationMenu manifest={NEW_NAVS}/>
+    <MobileNavigationMenu manifest={NEW_NAVS} />
 </header>
 
 <header class="xl:block hidden my-12 text-spc-light">
     <div class="flex justify-around align-center my-8 w-full">
-        <SPCLogo dim={120}/>
+        <SPCLogo dim={120} />
     </div>
 
     <DesktopNav />
-    <hr class="mt-4 border-spc-light/20"/>
+    <hr class="mt-4 border-spc-light/20" />
 </header>

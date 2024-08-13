@@ -16,6 +16,7 @@ const dummyImg =
     class="htmxenable flex flex-no-wrap overflow-x-auto no-scrollbar scrolling-touch items-start my-6"
     hx-get={get_api_route("read-blogs-latest")}
     hx-trigger="every 300ms"
+    hx-swap="outerHTML"
   >
     <Loader />
   </div>
