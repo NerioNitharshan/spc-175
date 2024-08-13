@@ -184,4 +184,18 @@ class Auth
                 exit(1);
         }
     }
+
+    #[NoReturn] public function mobile_auth_state(): void
+    {
+       session_start();
+
+       if (isset($_SESSION['email'])){
+           echo Helpers::renderNative(VIEWS."mobile-state-auth.php", []);
+       } else {
+           echo Helpers::renderNative(VIEWS."mobile-state-unauth.html", []);
+       }
+
+       session_write_close();
+       exit();
+    }
 }

@@ -1,5 +1,7 @@
 ---
 import {NEW_NAVS} from "../../config/navigation";
+import Loader from "./Loader.astro";
+import { get_api_route } from "../../config/global";
 
 const {manifest}:{manifest: typeof NEW_NAVS;} = Astro.props;
 ---
@@ -69,5 +71,9 @@ const {manifest}:{manifest: typeof NEW_NAVS;} = Astro.props;
                     </a>
             )
         )}
+        <div hx-get={get_api_route("mobile-auth-state")} hx-swap="outerHTML" hx-trigger="load delay:200ms"
+            class="htmxenable">
+            <Loader />
+        </div>
     </div>
 </nav>

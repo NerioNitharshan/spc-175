@@ -84,6 +84,7 @@ $routes = [
     "logout" => "logout",
     "activate-user"=> [$auth, "activate_user"],
     "auth-state" => [$auth, "auth_state"],
+    "mobile-auth-state" => [$auth, "mobile_auth_state"],
     "comments" => "comments",
     "allowed-to-comment" => "allowed_to_comment",
     "projects" => "projects",
