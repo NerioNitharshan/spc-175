@@ -32,7 +32,7 @@ function login()
         session_start();
         session_regenerate_id();
         $_SESSION["email"] = $email;
-        readfile(VIEWS . "login-ok.html");
+        readfile(VIEWS . "login-ok.php");
     } else {
         http_response_code(400);
         exit(1);

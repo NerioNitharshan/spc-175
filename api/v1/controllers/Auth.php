@@ -33,7 +33,7 @@ class Auth
         debug("auth_state handler invoke", __FILE__);
 
         if (isset($_SESSION["email"]) === false) {
-            echo Helpers::renderNative(VIEWS . 'noauth.php', ["login" => SERVER . '/auth/login', "sigin" => SERVER . '/auth/signin']);
+            echo Helpers::renderNative(VIEWS . 'noauth.html', ["login" => SERVER . '/auth/login', "sigin" => SERVER . '/auth/signin']);
             exit(0);
         }
 
@@ -76,7 +76,10 @@ class Auth
                 session_start();
                 session_regenerate_id();
                 $_SESSION["email"] = $email;
-                echo Helpers::renderNative(VIEWS . "login-ok.html", []);
+                echo Helpers::renderNative(VIEWS . "login-ok.php", [
+                    "is_user_editor"=> $users->check_roles_exist(EDITOR_ROLE, $_SESSION['email']),
+                    "is_user_sadmin"=> $users->check_roles_exist(SUPADMIN_ROLE, $_SESSION['email'])
+                ]);
                 break;
 
             case Constants::NotFound:
