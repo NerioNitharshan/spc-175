@@ -2,6 +2,10 @@
    <?php include_once VIEWS.'auth-ok-navbar.php'; ?>
 </div>
 
+<div id="navbar-auth-mobile">
+    <?php include_once VIEWS.'mobile-state-auth.php'; ?>
+</div>
+
 <div id="main-content">
 <h2 class="font-serif text-[36px] font-bold leading-[0.9] text-spc-sea">
     Done!

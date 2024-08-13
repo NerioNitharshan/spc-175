@@ -5,7 +5,7 @@ import { get_api_route } from "../../config/global";
 ---
 
 <form method="post" hx-post={get_api_route("login")} hx-swap="outerHTML"
-hx-select-oob="#navbar-auth:innerHTML"
+hx-select-oob="#navbar-auth:innerHTML, #navbar-auth-mobile:innerHTML"
 >
     <TextInput type="email" id="email" label="Email Address" />
 
