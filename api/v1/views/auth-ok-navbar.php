@@ -53,14 +53,11 @@
         <!--destructive actions-->
         <form action="<?= API . "logout" ?>" method="post">
             <button
-                class="font-bold block px-4 py-2 text-sm hover:bg-spc-gold hover:text-black transition-colors duration-200 ease-in-out"
+                class="font-bold w-full text-left block px-4 py-2 text-sm hover:bg-spc-gold hover:text-black transition-colors duration-200 ease-in-out"
                 type="submit"
             >Logout
             </button
             >
         </form>
-        <a href="#"
-           class="font-bold block px-4 py-2 text-sm hover:bg-spc-gold hover:text-black transition-colors duration-200 ease-in-out"
-           role="menuitem" tabindex="-1">Deactivate Profile</a>
     </div>
 </div>

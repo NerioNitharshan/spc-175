@@ -26,28 +26,28 @@
         <li>
             <a href="/iam/me"
                x-on:click="open = false"
-               class="font-bold block px-4 py-2 text-sm hover:bg-spc-gold hover:text-black transition-colors duration-200 ease-in-out">
+               class=" block px-2 py-2  hover:bg-spc-gold hover:text-black transition-colors duration-200 ease-in-out">
                 Edit Profile
             </a>
         </li>
         <li>
             <a href="/projects/mine"
                x-on:click="open = false"
-               class="font-bold block px-4 py-2 text-sm hover:bg-spc-gold hover:text-black transition-colors duration-200 ease-in-out">
+               class=" block px-2 py-2  hover:bg-spc-gold hover:text-black transition-colors duration-200 ease-in-out">
                 My Projects
             </a>
         </li>
         <li>
             <a href="/iam/log"
                x-on:click="open = false"
-               class="font-bold block px-4 py-2 text-sm hover:bg-spc-gold hover:text-black transition-colors duration-200 ease-in-out">
+               class=" block px-2 py-2  hover:bg-spc-gold hover:text-black transition-colors duration-200 ease-in-out">
                 My Activity
             </a>
         </li>
         <li>
-            <form class="w-full" action="<?= API . "logout" ?>" method="post">
+            <form class="" action="<?= API . "logout" ?>" method="post">
                 <button
-                    class="font-bold block px-4 py-2 text-sm hover:bg-spc-gold hover:text-black transition-colors duration-200 ease-in-out"
+                    class=" px-2 py-2  hover:bg-spc-gold hover:text-black transition-colors duration-200 ease-in-out"
                     type="submit">
                     Logout
                 </button>
