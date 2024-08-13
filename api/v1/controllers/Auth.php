@@ -54,6 +54,7 @@ class Auth
      */
     public function login(): void
     {
+        session_start();
         if (isset($_SESSION["email"])) {
             header("Location: " . SERVER . "/");
             http_response_code(303);
@@ -73,7 +74,6 @@ class Auth
 
         switch ($users->authenticateUser($email, $password)) {
             case Constants::OK:
-                session_start();
                 session_regenerate_id();
                 $_SESSION["email"] = $email;
                 echo Helpers::renderNative(VIEWS . "login-ok.php", [
