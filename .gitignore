@@ -42,3 +42,6 @@ app/
 
 **/vendor
 lymp/
+
+#google creds
+**/*-google-*.json
