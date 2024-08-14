@@ -11,7 +11,8 @@ import alpinejs from "@astrojs/alpinejs";
 export default defineConfig({
     // swup({ globalInstance: true, reloadScripts: true, updateHead:true, forms:true, smoothScrolling:true, progress:true, debug:true })
     integrations: [tailwind(), mdx(), alpinejs(), swup({
-        theme: ["overlay", { direction: "to-bottom" }],
+        // theme: ["overlay", { direction: "to-bottom" }],
+        theme: "fade",
         progress: true,
         reloadScripts: true,
         updateHead: true,
