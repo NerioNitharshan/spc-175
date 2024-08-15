@@ -42,3 +42,5 @@ app/
 
 **/vendor
 lymp/
+
+**/*google*.json
