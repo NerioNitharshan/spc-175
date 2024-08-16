@@ -1,0 +1,18 @@
+---
+import { MASS } from "../../config/footer";
+import GroupTitle from "./GroupTitle.astro";
+---
+
+<div class="my-8">
+    <GroupTitle title="Holy Mass Schedules." />
+
+    <div>
+        {
+            MASS.map(m =>
+                <div class="flex items-baseline justify-start space-x-6">
+                    <p class="text-white/70 font-mono text-sm">{m.date}</p>
+                    <p>{m.text}</p>
+                </div>)
+        }
+    </div>
+</div>
