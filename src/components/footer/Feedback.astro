@@ -1,0 +1,54 @@
+---
+import { FEEDBACK_TEXT } from "../../config/footer";
+import GroupTitle from "./GroupTitle.astro";
+---
+
+<div class="w-full my-6 hidden xl:block">
+    <GroupTitle title="Feedback." />
+
+    <textarea id="feedback-txt" placeholder={FEEDBACK_TEXT.placeholder} rows="3"
+cols="60"              class="block mt-4 bg-spc-dark text-spc-light rounded-sm p-2" />
+
+    <button id="feedback-btn" class="bg-spc-dark mt-2 px-4 py-1 rounded-sm">Send.</button>
+    <p class="text-[10px] font-mono mt-2 text-spc-light/50">{FEEDBACK_TEXT.rate}</p>
+</div>
+
+<script>
+    import { get_api_route } from "../../config/global";
+
+    const btn = document.querySelector("#feedback-btn");
+    const textarea = document.querySelector("#feedback-txt");
+    let rate = 0;
+
+    function rateLimitSend() {
+        btn.innerHTML = `Resend in ${120 - rate} minutes`;
+        rate += 1;
+    }
+
+    async function submitFeedback() {
+        if (rate > 0) {
+            return;
+        }
+
+        const feedback = textarea.value;
+        console.info(feedback, "feature not yet implemented");
+
+        const res = await fetch(get_api_route("annon-feedback"), {
+            method: "POST"
+        });
+
+        textarea.value = "";
+        if (res.status === 201) {
+            console.info("feedback submitted");
+        } else {
+            console.info("something wrong with annonym-feedback endpoint");
+        }
+
+        rateLimitSend();
+        setInterval(rateLimitSend, 60 * 1000);
+
+    }
+
+    btn.addEventListener("click", submitFeedback);
+
+</script>

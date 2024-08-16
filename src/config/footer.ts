@@ -29,4 +29,9 @@ const SOCIAL: Array<{ icon: any; text: string; link: string; }> = [
     { "icon": "", "text": " YouTube", "link": "https://www.youtube.com/@st.patrickscollegejaffna.8326/streams" }
 ];
 
-export { MASS, QUICK_NAVI, CONTACT_INFO, SOCIAL };
+const FEEDBACK_TEXT = {
+    placeholder: "Let the SPC Media Unit what you think of site and enable them to further enhance the experience.",
+    rate: "Rate limited to once per 120 minutes for DDOS and Sloth protection!"
+};
+
+export { MASS, QUICK_NAVI, CONTACT_INFO, SOCIAL, FEEDBACK_TEXT };

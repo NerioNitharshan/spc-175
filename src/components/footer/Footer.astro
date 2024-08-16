@@ -4,13 +4,11 @@ import FooterBanner from "./FooterBanner.astro";
 
 import "@fontsource/playfair-display/700.css";
 import "@fontsource/space-mono/400.css";
-import HolyMassDates from "./HolyMassDates.astro";
 import QuickNavi from "./QuickNavi.astro";
 import GroupTitle from "./GroupTitle.astro";
-import { CONTACT_INFO, SOCIAL } from "../../config/footer";
+import { CONTACT_INFO, FEEDBACK_TEXT, SOCIAL } from "../../config/footer";
 import SPCLogo from "../common/SPCLogo.astro";
-import { Image } from "astro:assets";
-import shamrock from "~/assets/shamrock.svg";
+import Feedback from "@components/footer/Feedback.astro";
 ---
 
 <footer class="lg:hidden bg-[#393939] text-spc-light px-6 py-12 md:px-0">
@@ -72,44 +70,30 @@ import shamrock from "~/assets/shamrock.svg";
 <footer class="hidden lg:block space-y-2 bg-[#393939] text-spc-light overflow-clip p-12 xl:p-20 xl:pb-0 rounded-t-2xl">
     <FooterBanner />
 
-    <div class="relative">
-        <div class="flex items-start justify-start space-x-32">
-            <QuickNavi />
+    <div class="flex items-start justify-start">
+        <div class="w-4/5">
+            <div class="flex items-start justify-start space-x-32">
+                <QuickNavi />
 
-            <div class="my-8">
-                <GroupTitle title="Contact Us." />
+                <div class="my-8">
+                    <GroupTitle title="Contact Us." />
 
-                <div>
-                    {CONTACT_INFO.map(c => <p class="mt-2 text-spc-light" set:html={c} />)}
+                    <div>
+                        {CONTACT_INFO.map(c => <p class="mt-2 text-spc-light" set:html={c} />)}
+                    </div>
                 </div>
             </div>
-
         </div>
 
-        <div class="w-3/5">
-            <FooterAcknowledgement />
-        </div>
-
-        <div class="absolute bottom-0 right-0 z-0 hidden xl:block">
-            <svg height="600px" width="640px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg"
-                 xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.00 512.00" xml:space="preserve"
-                 fill="" data-darkreader-inline-fill="" style="--darkreader-inline-fill: #000000;"
-                 transform="rotate(-45)matrix(1, 0, 0, 1, 0, 0)" stroke="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#202020CCCCCC"
-                   stroke-width="0" data-darkreader-inline-stroke=""
-                   style="--darkreader-inline-stroke: #202020c8c3bc;"></g>
-                <g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0 {
-                    fill: #333333;
-                } </style>
-                    <g> <path class="st0"
-                              d="M368.004,193.98c-13.813,0-27.05,2.471-39.295,6.985c25.007-20.845,40.926-52.223,40.926-87.324 C369.635,50.869,318.766,0,256.001,0c-62.756,0-113.649,50.869-113.649,113.641c0,35.101,15.927,66.471,40.934,87.316 c-12.24-4.506-25.474-6.977-39.278-6.977c-62.764,0-113.644,50.877-113.644,113.641c0,62.764,50.88,113.642,113.644,113.642 c40.261,0,75.527-21.004,95.711-52.58C235.026,416.526,222.073,480.4,187.313,512c68.688,0,68.688,0,68.688,0s0,0,68.696,0 c-34.764-31.6-47.717-95.474-52.405-143.317c20.18,31.576,55.45,52.58,95.711,52.58c62.76,0,113.633-50.878,113.633-113.642 C481.637,244.857,430.764,193.98,368.004,193.98z"></path> </g> </g></svg>
-        </div>
+        <Feedback is:client />
     </div>
-
+    <div class="w-5/5">
+        <FooterAcknowledgement />
+    </div>
     <div class="my-8">
         <hr class="border-spc-light/20 my-8 border">
 
-        <div class="flex items-center justify-between">
+        <div class="pb-4 flex items-center justify-between">
             <div class="space-x-4 flex items-baseline text-spc-light/80 justify-start">
                 {
                     SOCIAL.map(c => <a href={c.link}>{c.text}</a>)
