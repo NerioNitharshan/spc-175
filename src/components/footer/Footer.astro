@@ -1,18 +1,68 @@
 ---
-import FooterTail from "./FooterTail.astro";
 import FooterAcknowledgement from "./FooterAcknowledgement.astro";
 import FooterBanner from "./FooterBanner.astro";
 
 import "@fontsource/playfair-display/700.css";
 import "@fontsource/space-mono/400.css";
+import HolyMassDates from "./HolyMassDates.astro";
+import QuickNavi from "./QuickNavi.astro";
+import GroupTitle from "./GroupTitle.astro";
+import { CONTACT_INFO, SOCIAL } from "../../config/footer";
+import SPCLogo from "../common/SPCLogo.astro";
 ---
 
 <footer class="bg-[#393939] text-spc-light px-6 py-12 md:px-0">
-  <div class="md:px-12 xl:px-96">
-    <FooterBanner />
+    <div class="md:px-12 xl:px-96">
+        <FooterBanner />
 
-    <FooterAcknowledgement />
+        <!--<HolyMassDates />-->
 
-    <FooterTail />
-  </div>
+        <QuickNavi />
+
+        {/* contact info */}
+        <div class="my-8">
+            <GroupTitle title="Contact Us." />
+
+            <div>
+                {CONTACT_INFO.map(c => <p class="mt-2 text-spc-light" set:html={c} />)}
+            </div>
+        </div>
+
+        {/* social links */}
+        <div class="my-8">
+            <GroupTitle title="Follow Us." />
+
+            <div class="space-y-1 mt-1">
+                {
+                    SOCIAL.map(s => <a class="block" href={s.link}>{s.text}</a>)
+                }
+            </div>
+
+        </div>
+
+        {/* social links */}
+        <div class="my-8">
+            <GroupTitle title="Fineprints." />
+
+            <div class="space-y-1 mt-1">
+                <a class="block" href="/pop">Privacy Policy</a>
+                <a class="block" href="/toc">Terms and Conditions</a>
+                <a class="block" href="https://github.com/BirnadinErick/spc-175#Apache-2.0-1-ov-file">
+                    Apache 2.0 License
+                </a>
+            </div>
+        </div>
+
+        <FooterAcknowledgement />
+
+<div class="my-4">
+    <hr class="my-4 border-white/20">
+</div>
+        <div class="my-2 flex items-center justify-around">
+            <div class="flex justify-start items-center space-x-0">
+                <SPCLogo dim="72" />
+                <p class="font-bold text-lg text-spc-light/90">St. Patrick's College</p>
+            </div>
+        </div>
+    </div>
 </footer>

@@ -1,0 +1,11 @@
+---
+import GroupTitle from "./GroupTitle.astro";
+import { QUICK_NAVI } from "../../config/footer";
+---
+<div class="my-8">
+    <GroupTitle title="Quick Navigation." />
+
+    <div class="grid grid-cols-2">
+        {QUICK_NAVI.map(n => <a class="hover:underline hover:underline-offset-4" href={n.link}>{n.text}</a>)}
+    </div>
+</div>
