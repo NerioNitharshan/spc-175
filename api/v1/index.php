@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set("display_errors", 0);
 ini_set("log_errors", "On");
 
-define("DEBUG", true);
+define("DEBUG", false);
 
 function error_handler(int $errno, string $errstr, string $errfile, int $errll)
 {
