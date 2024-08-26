@@ -1,10 +1,17 @@
-const DEBUG = true;
+const DEBUG = false;
 
 let API = "";
+let APP = "";
 if (DEBUG) {
     API = "http://localhost:2004/api/v1/index.php";
+    APP = "http://localhost:2007";
 } else {
     API = "https://www.spcjaffna-beta.org/api/v1/index.php";
+    APP = "https://www.spcjaffna-beta.org/";
+}
+
+function get_app_route(route: string) {
+    return APP + route;
 }
 
 function get_api_route(route: string) {
@@ -117,4 +124,4 @@ const EDITOR_DEMO_DATA = {
     "version": "2.29.1"
 };
 
-export { get_api_route, EDITOR_DEMO_DATA };
+export { get_api_route, get_app_route, EDITOR_DEMO_DATA };

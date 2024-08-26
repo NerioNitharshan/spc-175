@@ -1,0 +1,400 @@
+---
+import CommonHead from "../components/common/CommonHead.astro";
+import Footer from "../components/footer/Footer.astro";
+import MobileNavButton from "../components/common/MobileNavButton.astro";
+import HTMX from "../components/common/HTMX.astro";
+
+import "@fontsource/space-grotesk/400.css";
+import "../components/common/swup.css";
+
+import TIMELINE_EVENTS from "@config/timeline-events";
+import PrimaryCTA from "../components/common/PrimaryCTA.astro";
+import SecondaryCTA from "../components/common/SecondaryCTA.astro";
+import SectionTitle from "../components/common/SectionTitle.astro";
+import { get_app_route } from "../config/global";
+---
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        overscroll-behavior: contain;
+
+        @media (prefers-reduced-motion: no-preference) {
+            scroll-behavior: smooth;
+        }
+    }
+
+    body {
+        --activeColor: hsl(48 100 50);
+        --navBgColor: hsl(160 67 20);
+        --navTextColor: rgb(144 144 150);
+        --mainBg: rgb(20 20 23);
+        font-family: 'Syncopate', sans-serif;
+        min-height: 100vh;
+        margin: 0;
+        color: rgb(20 20 23);
+        background: var(--mainBg);
+    }
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+    }
+
+    section {
+        --h: calc(var(--i) * 30);
+
+        min-height: 100vh;
+        padding: 8rem 0 max(5vh, 2rem);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: hsl(0 0 13);
+    }
+
+    .container {
+        width: 100%;
+        max-width: 80rem;
+        padding: 0 max(5vw, 1rem);
+        transform-style: perspective-3d;
+        perspective: 900px;
+
+        @media (min-width: 32em) {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 1rem;
+        }
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: var(--navBgColor);
+        color: var(--navTextColor);
+        z-index: 2;
+        height: 6rem;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 1.7rem;
+            left: 0;
+            width: 100%;
+            height: 0.25rem;
+            background: currentColor;
+            pointer-events: none;
+        }
+    }
+
+    .marker {
+        position: fixed;
+        top: 1.75rem;
+        left: 4rem;
+        width: 1rem;
+        height: 1rem;
+        transform: translate3d(-50%, -50%, 0);
+        background: var(--activeColor);
+        border-radius: 100%;
+        z-index: 2000;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: calc(50% - 0.2rem);
+            right: 100%;
+            width: 4rem;
+            height: 0.4rem;
+            background-color: var(--activeColor);
+        }
+    }
+
+    .nav__track {
+        position: relative;
+        min-width: max(200rem, 200%);
+        padding: 1.5rem max(100rem, 100%) 0 0;
+        height: 6rem;
+    }
+
+    .nav__list {
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav__link {
+        position: relative;
+        display: block;
+        min-width: 8rem;
+        padding: 2.25rem 1rem 0.5rem;
+        text-align: center;
+        color: inherit;
+        text-decoration: none;
+        z-index: 1;
+        transition: color 150ms;
+
+        &:hover,
+        &:focus {
+            color: var(--activeColor);
+            text-decoration: underline;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 0.65rem;
+            height: 0.65rem;
+            background-color: currentColor;
+            border-radius: 50%;
+            transform: translate3d(-50%, 0, 0);
+            transform-origin: center center;
+        }
+
+        span {
+            display: block;
+            transition: transform 200ms;
+        }
+
+        &.is-active {
+            span {
+                transform: scale(1.4);
+                color: var(--activeColor);
+            }
+
+            &::after {
+                display: none;
+            }
+        }
+    }
+
+    .section__heading {
+        font-size: clamp(2rem, 12vmin, 7rem);
+        line-height: 1;
+        letter-spacing: -0.06em;
+        margin: 0 0 1rem;
+        grid-row: 1;
+        grid-column: 1 / span 7;
+        align-self: end;
+        position: relative;
+        z-index: 1;
+
+        span {
+            display: block;
+        }
+
+        span:first-child {
+            font-size: clamp(1rem, 10vmin, 5rem);
+        }
+
+        span:nth-child(2) {
+            word-break: break-word;
+        }
+    }
+
+    .section__image {
+        grid-row: 1;
+        grid-column: 5 / span 3;
+        position: relative;
+        box-shadow: 0.45rem 0.45rem 8rem rgb(0 0 0 / 0.3);
+        align-self: center;
+    }
+</style>
+
+<html lang="en">
+<CommonHead title="175 Years Time Line | SPC Media Unit | 175 years" />
+
+<body class="cursor-default bg-spc-dark text-spc-light font-sans overflow-x-clip" x-data="{open:false}">
+
+<main>
+
+    <nav>
+        <div class="marker"></div>
+
+        <div class="nav__track" data-draggable>
+            <ul class="nav__list">
+                {
+                    TIMELINE_EVENTS.map((e, idx) =>
+                        <li>
+                            <a href={`#section_${idx}`} class="nav__link" data-link><span>{e.date}</span></a>
+                        </li>
+                    )
+                }
+            </ul>
+        </div>
+    </nav>
+
+    <article>
+        {
+            TIMELINE_EVENTS.map((e, idx) =>
+                <section id={`section_${idx}`} style={`--i: ${idx}`}>
+                    <div class="container">
+                        <h2 class="section__heading">
+                            <span>{e.date}</span>
+                            <span>{e.title}</span>
+                        </h2>
+                        <div class="section__image">
+                            <img src={e.cover} />
+                        </div>
+                    </div>
+                </section>)
+
+        }
+    </article>
+
+    <div
+        class="px-8 my-8 md:px-12 lg:px-24 xl:px-96"
+    >
+        <SectionTitle title="That's All for now" />
+        <div class="my-4 space-y-4 lg:flex lg:items-baseline lg:justify-start lg:space-x-4 lg:space-y-0">
+            <PrimaryCTA text="Go back home" url={get_app_route('')} />
+            <SecondaryCTA text="Explore history in-depth" url={get_app_route("alma-mater/history-of-the-college")} />
+        </div>
+    </div>
+</main>
+
+<MobileNavButton />
+
+<Footer />
+
+<HTMX />
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import { Draggable } from "gsap/Draggable";
+
+    gsap.registerPlugin(ScrollTrigger, Draggable);
+
+    const scrollContainer = document.querySelector("[data-scroller]");
+    const sections = gsap.utils.toArray("section");
+    const track = document.querySelector("[data-draggable]");
+    const navLinks = gsap.utils.toArray("[data-link]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const lastItemWidth = () => navLinks[navLinks.length - 1].offsetWidth;
+
+    const getUseableHeight = () => document.documentElement.offsetHeight - window.innerHeight;
+
+    const getDraggableWidth = () => {
+        return ((track.offsetWidth * 0.5) - lastItemWidth());
+    };
+
+    const updatePosition = () => {
+        const left = track.getBoundingClientRect().left * -1;
+        const width = getDraggableWidth();
+        const useableHeight = getUseableHeight();
+        const y = gsap.utils.mapRange(0, width, 0, useableHeight, left);
+
+        st.scroll(y);
+    };
+
+    const tl = gsap.timeline()
+        .to(track, {
+            x: () => getDraggableWidth() * -1,
+            ease: "none"
+        });
+
+    const st = ScrollTrigger.create({
+        animation: tl,
+        scrub: 0
+    });
+
+    const draggableInstance = Draggable.create(track, {
+        type: "x",
+        inertia: false,
+        bounds: {
+            minX: 0,
+            maxX: getDraggableWidth() * -1
+        },
+        edgeResistance: 1,
+        onDragStart: () => st.disable(),
+        onDragEnd: () => st.enable(),
+        onDrag: updatePosition
+    });
+
+    const initSectionAnimation = () => {
+        /* Do nothing if user prefers reduced motion */
+        if (prefersReducedMotion.matches) return;
+
+        sections.forEach((section, index) => {
+            const heading = section.querySelector("h2");
+            const image = section.querySelector(".section__image");
+
+            /* Set animation start state */
+            gsap.set(heading, {
+                opacity: 0,
+                y: 50
+            });
+            gsap.set(image, {
+                opacity: 0,
+                rotateY: 0
+            });
+
+            /* Create the timeline */
+            const sectionTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: section,
+                    start: () => "top center",
+                    end: () => `+=${window.innerHeight}`,
+                    toggleActions: "play reverse play reverse"
+                    // toggleClass: 'is-active',
+                    // markers: true,
+                }
+            });
+
+            /* Add tweens to the timeline */
+            sectionTl.to(image, {
+                opacity: 1,
+                rotateY: -5,
+                duration: 6,
+                ease: "elastic"
+            })
+                .to(heading, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 2
+                }, 0.5);
+
+            const sectionTl2 = gsap.timeline({
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 20px",
+                    end: () => `bottom top`,
+                    toggleActions: "play none play reverse",
+                    onToggle: ({ isActive }) => {
+                        const sectionLink = navLinks[index];
+
+                        if (isActive) {
+                            sectionLink.classList.add("is-active");
+                        } else {
+                            sectionLink.classList.remove("is-active");
+                        }
+                    }
+                }
+            });
+        });
+    };
+
+    initSectionAnimation();
+
+    /* Allow navigation via keyboard */
+    track.addEventListener("keyup", (e) => {
+        const id = e.target.getAttribute("href");
+        if (!id || e.key !== "Tab") return;
+
+        const section = document.querySelector(id);
+        const y = section.getBoundingClientRect().top + window.scrollY;
+
+        st.scroll(y);
+    });
+
+</script>

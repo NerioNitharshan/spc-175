@@ -5,6 +5,7 @@ import "@fontsource/space-grotesk/400.css";
 
 import PrimaryCTA from "@components/common/PrimaryCTA.astro";
 import SecondaryCTA from "@components/common/SecondaryCTA.astro";
+import { get_app_route } from "../../config/global";
 ---
 
 <section
@@ -17,8 +18,8 @@ import SecondaryCTA from "@components/common/SecondaryCTA.astro";
   </h2>
 
   <div class="mt-8 space-y-4">
-    <PrimaryCTA text="how we feast it." url="/" />
-    <SecondaryCTA text="learn about our 175 years" url="/" />
+    <PrimaryCTA text="how we feast it." url={get_app_route("175-timeline")} />
+    <SecondaryCTA text="learn about our 175 years" url="/alma-mater/history-of-the-college" />
   </div>
 </section>
 
@@ -33,7 +34,7 @@ import SecondaryCTA from "@components/common/SecondaryCTA.astro";
     </h1>
 
     <div class="mt-8 lg:mt-12 space-y-4 xl:absolute xl:bottom-0 xl:right-0">
-      <PrimaryCTA text="how we feast it." url="/" />
+      <PrimaryCTA text="how we feast it." url="/175-timeline" />
     </div>
   </div>
 </section>
