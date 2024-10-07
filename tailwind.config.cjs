@@ -21,7 +21,7 @@ module.exports = {
             colors: {
                 "spc-gold": "#FFCD00",
                 "spc-green": "#115740",
-                "spc-sea": "#5ABF64",
+                "spc-sea": "#d7f272",
                 "spc-dark": "#202020",
                 "spc-light": "#F9F9F2",
                 "spc-dark-green": "#0B1808",
