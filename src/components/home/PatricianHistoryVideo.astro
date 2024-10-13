@@ -1,15 +1,15 @@
 ---
-import PatricianHistoryVideo from "@components/home/PatricianHistoryVideo.astro";
 import SectionTitle from "@components/common/SectionTitle.astro";
+import ShamrockBatch from "@components/common/ShamrockBatch.astro";
 ---
 
-<section class="relative overflow-hidden bg-gradient-to-b from-spc-dark via-green-900 to-spc-dark py-20">
+<section class="relative overflow-hidden py-20">
   <div class="absolute inset-0 bg-grid-pattern opacity-10"></div>
   <div class="container mx-auto px-4 relative z-10">
     <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
       <div class="text-center lg:text-left lg:w-1/2">
         <SectionTitle title="The 175 Years Of <br /> Legacy" />
-        <p class="mt-4 text-lg text-gray-300 max-w-lg mx-auto lg:mx-0">
+        <p class="mt-4 text-lg text-spc-light max-w-lg mx-auto lg:mx-0">
           Celebrating nearly two centuries of academic excellence, innovation, and community impact. Our legacy is a testament to the enduring spirit of education and progress.
         </p>
       </div>
@@ -23,7 +23,6 @@ import SectionTitle from "@components/common/SectionTitle.astro";
               loop
               playsinline
               poster="/alma-mater-poster.jpg"
-            >
               <source src="/alma-mater.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
@@ -59,5 +58,7 @@ import SectionTitle from "@components/common/SectionTitle.astro";
     video.play().catch(error => {
       console.error("Video autoplay failed:", error);
     });
+  } else {
+    console.warn("Video element not found.");
   }
 </script>
