@@ -21,31 +21,28 @@ const norms = [
 ];
 ---
 
-<section class="relative overflow-hidden py-20 md:py-32">
+<section class="relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24">
   <div class="absolute inset-0 opacity-10"></div>
   <div class="container mx-auto px-4 relative z-10">
-    <div class="flex flex-col md:flex-row items-center justify-between">
-      <div class="text-center md:text-left mb-10 md:mb-0 md:w-1/2">
-        <h2 class="text-3xl md:text-4xl font-bold text-spc-light/90 mb-2">Embracing</h2>
-        <h1 class="text-6xl md:text-7xl font-mono font-bold text-spc-gold mb-2">
+    <div class="flex flex-col lg:flex-row items-center justify-between">
+      <div class="text-center lg:text-left mb-10 lg:mb-0 lg:w-1/2">
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-spc-light/90 mb-2">Embracing</h2>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-mono font-bold text-spc-gold mb-2">
           Patrician
         </h1>
-        <h2 class="text-3xl md:text-4xl font-bold text-spc-light/90">
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-spc-light/90">
           Norms
         </h2>
-        <p class="mt-4 text-lg text-spc-light/70 max-w-lg mx-auto md:mx-0">
+        <p class="mt-4 text-base sm:text-lg text-spc-light/70 max-w-lg mx-auto lg:mx-0">
           "Guiding principles that shape our educational journey and foster excellence in every Patrician."
         </p>
-        <div class="mt-8 space-y-4 md:space-y-0 md:space-x-4 flex flex-col md:flex-row justify-center md:justify-start">
+        <div class="mt-8 space-y-4 sm:space-y-0 sm:space-x-4 flex flex-col sm:flex-row justify-center lg:justify-start">
           <PrimaryCTA text="Learn more on alma mater" url="/" />
-          <div class="hidden lg:hidden">
-              <SecondaryCTA text="Learn more on alma mater" url="/" />
-          </div>
+        </div>
       </div>
-      </div>
-      <div class="w-full md:w-1/2">
-        <div class="bg-spc-dark/50 rounded-lg p-6 shadow-xl">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="w-full lg:w-1/2 mt-10 lg:mt-0">
+        <div class="bg-spc-dark/50 rounded-lg p-6 shadow-lg sm:p-8">
+          <div class="grid grid-cols- gap-4">
             {norms.map((n) => <PatricianNorm norm={n[0]} desc={n[1]} />)}
           </div>
         </div>
@@ -53,12 +50,3 @@ const norms = [
     </div>
   </div>
 </section>
-
-<style>
-  .bg-grid-pattern {
-    background-image: 
-      linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
-    background-size: 20px 20px;
-  }
-</style>

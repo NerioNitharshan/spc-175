@@ -1,6 +1,5 @@
 ---
 import SectionTitle from "@components/common/SectionTitle.astro";
-import ShamrockBatch from "@components/common/ShamrockBatch.astro";
 ---
 
 <section class="relative overflow-hidden py-20">
@@ -14,7 +13,7 @@ import ShamrockBatch from "@components/common/ShamrockBatch.astro";
         </p>
       </div>
       <div class="w-full lg:w-1/2">
-        <div class="bg-spc-dark bg-opacity-50 rounded-lg shadow-2xl">
+        <div class="bg-spc-dark bg-opacity-50 rounded-lg shadow-lg">
           <div class="aspect-video rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300">
             <video 
               class="w-full h-full object-cover"
@@ -23,6 +22,8 @@ import ShamrockBatch from "@components/common/ShamrockBatch.astro";
               loop
               playsinline
               poster="/alma-mater-poster.jpg"
+              onerror="console.error('Video loading error');"
+            >
               <source src="/alma-mater.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
@@ -53,12 +54,12 @@ import ShamrockBatch from "@components/common/ShamrockBatch.astro";
 </style>
 
 <script>
-  const video = document.querySelector('video');
-  if (video) {
-    video.play().catch(error => {
-      console.error("Video autoplay failed:", error);
-    });
-  } else {
-    console.warn("Video element not found.");
-  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const video = document.querySelector('video');
+    if (video) {
+      video.play().catch(error => {
+        console.error("Video autoplay failed:", error);
+      });
+    }
+  });
 </script>

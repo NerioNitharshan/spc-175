@@ -17,7 +17,7 @@ const {manifest}:{manifest: typeof NEW_NAVS;} = Astro.props;
      x-transition:leave-start="transform translate-y-0"
      x-transition:leave-end="transform translate-y-full">
 
-    <h1 class="text-3xl font-serif mb-4 text-spc-light/50">Navigate the Site</h1>
+    <h1 class="text-3xl font-serif mb-4 text-spc-light/50 z-50">Navigate the Site</h1>
 
     <div class="space-y-5">
         {manifest.map(nav =>
