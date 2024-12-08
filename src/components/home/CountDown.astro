@@ -60,7 +60,7 @@
 
   function updateCountdown() {
     const now = new Date().getTime();
-    const distance = anniversaryDate - now;
+    const distance = anniversaryDate - now; 
 
     if (distance < 0) {
       clearInterval(countdownInterval);
@@ -84,7 +84,7 @@
   }
 
   const countdownInterval = setInterval(updateCountdown, 1000);
-  updateCountdown();
+  // updateCountdown();
 
   // Animation
   const countdownItems = document.querySelectorAll('.countdown-item');
