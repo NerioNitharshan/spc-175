@@ -26,7 +26,7 @@ import { get_api_route } from "../../config/global";
                                     class="inline-flex w-full justify-center gap-x-1.5 rounded-sm px-3 py-2 text-sm font-semibold group-hover:underline group-hover:underline-offset-4"
                                     id="menu-button" aria-expanded="true" aria-haspopup="true">
                                 <span x-text="nav.title"></span>
-                                <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
+                                <svg class="-mr-1 h-5 w-5 text-gray-400 " viewBox="0 0 20 20" fill="currentColor"
                                      aria-hidden="true">
                                     <path fill-rule="evenodd"
                                           d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
@@ -40,13 +40,13 @@ import { get_api_route } from "../../config/global";
                                  x-transition:leave="transition ease-in duration-75"
                                  x-transition:leave-start="transform opacity-100 scale-100"
                                  x-transition:leave-end="transform opacity-0 scale-95"
-                                 class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-sm bg-spc-bg-mid shadow-lg text-spc-light ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                 class="absolute right-0 z-20 mt-2 w-56 origin-top-right rounded-lg bg-spc-light shadow-lg text-spc-dark ring-1 ring-black ring-opacity-5 focus:outline-none"
                                  role="menu" aria-orientation="vertical" aria-labelledby="menu-button"
                                  tabindex="-1">
                                 <div class="py-1" role="none">
                                     <template x-for="child in nav.children" :key="child.title">
                                         <a :href="`/${nav.link}/${child.link}`"
-                                           class="font-bold block px-4 py-2 text-sm hover:bg-spc-gold hover:text-black transition-colors duration-200 ease-in-out"
+                                           class="font-bold block px-4 py-2 text-sm rounded-lg hover:bg-spc-gold hover:text-black transition-colors duration-200 ease-in-out"
                                            role="menuitem" tabindex="-1" x-text="child.title"></a>
                                     </template>
                                 </div>
